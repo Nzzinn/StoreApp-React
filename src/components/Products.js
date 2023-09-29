@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
 import { StyleSheet, View, Text, Image, FlatList, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
 
 export default function Products() {
-  const [cart, setCart] = useState([]);
-
   const produtos = [
     {
       id: 1,
@@ -147,24 +145,31 @@ export default function Products() {
     },
   ];
 
-  const addItemToCart = (product) => {
-    setCart([...cart, product]);
-  };
+  const [cart, setCart] = useState([]);
+
+  addToCart = (item) => {
+    const product = cart.find((product) => product.id === item.id);
+  
+    if (product) {
+      product.quantidade++;
+      setCart([...cart]);
+    } else {
+      setCart([...cart, { ...item, quantidade: 1 }]);
+    }
+  }
 
   const renderItem = ({ item }) => (
     <View style={styles.card}>
-      <Image source={{ uri: item.imagem }} style={styles.cardImage} />
-      <Text style={styles.cardTitle}>{item.nome}</Text>
-      <Text style={styles.cardPrice}>Preço: R${item.preco.toFixed(2)}</Text>
-      <Text style={styles.cardDescription}>{item.descricao}</Text>
+      {<><Image source={{ uri: item.imagem }} style={styles.cardImage} /><Text style={styles.cardTitle}>{item.nome}</Text><Text style={styles.cardPrice}>Preço: R${item.preco.toFixed(2)}</Text><Text style={styles.cardDescription}>{item.descricao}</Text></>}
       <TouchableOpacity
         style={styles.addToCartButton}
-        onPress={() => addItemToCart(item)}
+        onPress={() => addToCart(item)}
       >
         <Text style={styles.addToCartButtonText}>Adicionar ao Carrinho</Text>
       </TouchableOpacity>
     </View>
   );
+  
 
   return (
     <View>
