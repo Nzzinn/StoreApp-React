@@ -2,13 +2,21 @@ import BackgroundApp from "../components/BackgroundApp";
 import React, { useState } from "react";
 import { StyleSheet, Text, FlatList, Image, TouchableOpacity } from "react-native";
 import { View } from "react-native";
+import { cartList } from "../components/Products";
 
 export default function Cart() {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(cartList); // Inicialize o estado cart com cartList
 
   const removeFromCart = (item) => {
-    const updatedCart = cart.filter((product) => product.id !== item.id);
-    setCart(updatedCart);
+    // Crie uma nova lista de carrinho excluindo o item que está sendo removido
+    const newCart = cart.filter((product) => product.id !== item.id);
+    setCart(newCart); // Atualize o estado cart
+
+    // Também é possível atualizar cartList diretamente se necessário
+    const product = cartList.find((product) => product.id === item.id);
+    if (product) {
+      product.quantidade = 0;
+    }
   };
 
   const renderItem = ({ item }) => (
@@ -33,7 +41,7 @@ export default function Cart() {
       <View style={styles.container}>
         <Text style={styles.title}>Shopping Cart</Text>
         <FlatList
-          data={cart}
+          data={cart} // Use o estado cart para exibir os itens no carrinho
           renderItem={renderItem}
           keyExtractor={(item) => item.id.toString()}
         />

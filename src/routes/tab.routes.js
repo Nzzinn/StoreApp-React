@@ -1,9 +1,9 @@
-// TabRoutes.js
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Feather } from '@expo/vector-icons';
 import Home from '../screens/Home';
-import Cart, { cartItems } from '../screens/Cart';
+import Cart from '../screens/Cart';
+import { cartList } from '../components/Products';
 
 const Tab = createBottomTabNavigator();
 
@@ -28,7 +28,7 @@ export default function TabRoutes() {
             <Feather name="shopping-bag" size={size} color={color} />
           ),
           tabBarLabel: 'Bag',
-          tabBarBadge: '',
+          tabBarBadge: cartList.length,
         }}
       />
     </Tab.Navigator>

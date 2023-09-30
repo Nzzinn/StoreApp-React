@@ -1,8 +1,11 @@
 import { StyleSheet, View, Text, Image, FlatList, TouchableOpacity } from 'react-native';
-import React, { useState } from 'react';
+import { useState } from 'react';
+export let cartList = [];
 
 export default function Products() {
-  const produtos = [
+  const [cart, setCart] = useState([]);
+
+  const produtos = [ 
     {
       id: 1,
       nome: 'PlayStation 5',
@@ -145,17 +148,16 @@ export default function Products() {
     },
   ];
 
-  const [cart, setCart] = useState([]);
-
   addToCart = (item) => {
-    const product = cart.find((product) => product.id === item.id);
+    const product = cartList.find((product) => product.id === item.id);
   
     if (product) {
       product.quantidade++;
-      setCart([...cart]);
     } else {
-      setCart([...cart, { ...item, quantidade: 1 }]);
+      cartList.push({ ...item, quantidade: 1 });
     }
+    
+    setCart([...cartList]);
   }
 
   const renderItem = ({ item }) => (
