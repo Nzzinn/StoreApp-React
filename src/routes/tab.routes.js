@@ -3,11 +3,13 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Feather } from '@expo/vector-icons';
 import Home from '../screens/Home';
 import Cart from '../screens/Cart';
-import { cartList } from '../components/Products';
+import { useCart } from '../providers/CartContext';
 
 const Tab = createBottomTabNavigator();
 
 export default function TabRoutes() {
+  const { cart } = useCart(); 
+
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen
@@ -28,7 +30,7 @@ export default function TabRoutes() {
             <Feather name="shopping-bag" size={size} color={color} />
           ),
           tabBarLabel: 'Bag',
-          tabBarBadge: cartList.length,
+          tabBarBadge: cart.length,
         }}
       />
     </Tab.Navigator>

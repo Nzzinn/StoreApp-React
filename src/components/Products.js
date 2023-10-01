@@ -1,9 +1,8 @@
 import { StyleSheet, View, Text, Image, FlatList, TouchableOpacity } from 'react-native';
-import { useState } from 'react';
-export let cartList = [];
+import { useCart } from '../providers/CartContext';
 
-export default function Products() {
-  const [cart, setCart] = useState([]);
+export default function Products({ product }) {
+  const { addItemToCart } = useCart();
 
   const produtos = [ 
     {
@@ -148,24 +147,20 @@ export default function Products() {
     },
   ];
 
-  addToCart = (item) => {
-    const product = cartList.find((product) => product.id === item.id);
-  
+  const handleAddToCart = (product) => {
     if (product) {
-      product.quantidade++;
+      addItemToCart(product);
     } else {
-      cartList.push({ ...item, quantidade: 1 });
+      console.error('Erro: produto não definido ao adicionar ao carrinho.');
     }
-    
-    setCart([...cartList]);
-  }
+  };
 
   const renderItem = ({ item }) => (
     <View style={styles.card}>
       {<><Image source={{ uri: item.imagem }} style={styles.cardImage} /><Text style={styles.cardTitle}>{item.nome}</Text><Text style={styles.cardPrice}>Preço: R${item.preco.toFixed(2)}</Text><Text style={styles.cardDescription}>{item.descricao}</Text></>}
       <TouchableOpacity
         style={styles.addToCartButton}
-        onPress={() => addToCart(item)}
+        onPress={() => handleAddToCart(item)}
       >
         <Text style={styles.addToCartButtonText}>Adicionar ao Carrinho</Text>
       </TouchableOpacity>

@@ -1,35 +1,17 @@
 import BackgroundApp from "../components/BackgroundApp";
-import React, { useState } from "react";
 import { StyleSheet, Text, FlatList, Image, TouchableOpacity } from "react-native";
 import { View } from "react-native";
-import { cartList } from "../components/Products";
+import { useCart } from "../providers/CartContext";
 
 export default function Cart() {
-  const [cart, setCart] = useState(cartList); // Inicialize o estado cart com cartList
-
-  const removeFromCart = (item) => {
-    // Crie uma nova lista de carrinho excluindo o item que está sendo removido
-    const newCart = cart.filter((product) => product.id !== item.id);
-    setCart(newCart); // Atualize o estado cart
-
-    // Também é possível atualizar cartList diretamente se necessário
-    const product = cartList.find((product) => product.id === item.id);
-    if (product) {
-      product.quantidade = 0;
-    }
-  };
+  const { cart, removeItemFromCart } = useCart();
 
   const renderItem = ({ item }) => (
     <View style={styles.card}>
-      <>
-        <Image source={{ uri: item.imagem }} style={styles.cardImage} />
-        <Text style={styles.cardTitle}>{item.nome}</Text>
-        <Text style={styles.cardPrice}>Preço: R${item.preco.toFixed(2)}</Text>
-        <Text style={styles.cardDescription}>{item.descricao}</Text>
-      </>
+      {<><Image source={{ uri: item.imagem }} style={styles.cardImage} /><Text style={styles.cardTitle}>{item.nome}</Text><Text style={styles.cardPrice}>Preço: R${item.preco.toFixed(2)}</Text><Text style={styles.cardDescription}>{item.descricao}</Text></>}
       <TouchableOpacity
         style={styles.removeFromCartButton}
-        onPress={() => removeFromCart(item)}
+        onPress={() => removeItemFromCart(item)}
       >
         <Text style={styles.removeFromCartButtonText}>Remover do Carrinho</Text>
       </TouchableOpacity>
@@ -41,9 +23,9 @@ export default function Cart() {
       <View style={styles.container}>
         <Text style={styles.title}>Shopping Cart</Text>
         <FlatList
-          data={cart} // Use o estado cart para exibir os itens no carrinho
+          data={cart}
           renderItem={renderItem}
-          keyExtractor={(item) => item.id.toString()}
+          keyExtractor={(item) => item.id}
         />
         <View>
           <Text style={styles.total}>
