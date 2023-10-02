@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextInput, Animated, StyleSheet } from 'react-native';
 
-export default function Input({ label, value, onChangeText, isError, isPasswordEmpty }) {
+export default function Input({ label, value, onChangeText, isError, isPasswordEmpty } : any) {
     const [isFocused, setIsFocused] = useState(false);
     const animatedPlaceholderY = new Animated.Value(isFocused || value ? -20 : 0);
 

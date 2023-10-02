@@ -5,14 +5,14 @@ import { StyleSheet, View } from "react-native";
 import Input from "../components/Input";
 import Button from "../components/Button";
 
-export default function Login({ navigation }) {
+export default function Login({ navigation } : any) {
   const [email, setEmail] = useState("");
   const [isEmailError, setIsEmailError] = useState(false);
   const [password, setPassword] = useState("");
   const [isPasswordEmpty, setIsPasswordEmpty] = useState(false); 
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
 
-  const validateEmail = (email) => {
+  const validateEmail = (email : any) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
   };
@@ -45,7 +45,7 @@ export default function Login({ navigation }) {
         <Input
           label="E-mail"
           value={email}
-          onChangeText={(text) => setEmail(text)}
+          onChangeText={(text : any) => setEmail(text)}
           isError={isEmailError}
         />
 
@@ -55,7 +55,7 @@ export default function Login({ navigation }) {
 
         <Input
           label="Senha"
-          onChangeText={(text) => setPassword(text)}
+          onChangeText={(text : any) => setPassword(text)}
           value={password}
           isError={isPasswordEmpty}
         />

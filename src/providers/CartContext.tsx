@@ -1,12 +1,12 @@
 import React, { createContext, useContext, useState } from 'react';
 
-const CartContext = createContext();
+const CartContext = createContext({});
 
-export function CartProvider({ children }) {
-  const [cart, setCart] = useState([]);
+export function CartProvider({ children } : any) {
+  const [cart, setCart] = useState([] as any);
 
-  const addItemToCart = (item) => {
-    const index = cart.findIndex((cartItem) => cartItem.id === item.id);
+  const addItemToCart = (item : any) => {
+    const index = cart.findIndex((cartItem : any) => cartItem.id === item.id);
 
     if (index >= 0) {
       cart[index].quantidade += 1;
@@ -16,8 +16,8 @@ export function CartProvider({ children }) {
     }
   };
 
-  const removeItemFromCart = (item) => {
-    const index = cart.findIndex((cartItem) => cartItem.id === item.id);
+  const removeItemFromCart = (item : any) => {
+    const index = cart.findIndex((cartItem : any) => cartItem.id === item.id);
 
     if (index >= 0) {
       cart[index].quantidade -= 1;

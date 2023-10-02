@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native";
 
-export default function BackgroundApp({ children }) {
+export default function BackgroundApp({ children } : any) {
   return (
     <SafeAreaView style={styles.container}>
         {children}

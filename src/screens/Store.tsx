@@ -3,7 +3,7 @@ import { StyleSheet, Text } from "react-native";
 import { View } from "react-native";
 import Products from "../components/Products";
 
-export default function Home(){
+export default function Store(){
     return(
         <BackgroundApp>
             <View style={styles.container}>

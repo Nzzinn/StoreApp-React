@@ -1,8 +1,8 @@
 import { StyleSheet, View, Text, Image, FlatList, TouchableOpacity } from 'react-native';
 import { useCart } from '../providers/CartContext';
 
-export default function Products({ product }) {
-  const { addItemToCart } = useCart();
+export default function Products() {
+  const { addItemToCart } : any = useCart();
 
   const produtos = [ 
     {
@@ -147,7 +147,7 @@ export default function Products({ product }) {
     },
   ];
 
-  const handleAddToCart = (product) => {
+  const handleAddToCart = (product : any) => {
     if (product) {
       addItemToCart(product);
     } else {
@@ -155,7 +155,7 @@ export default function Products({ product }) {
     }
   };
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item } : any) => (
     <View style={styles.card}>
       {<><Image source={{ uri: item.imagem }} style={styles.cardImage} /><Text style={styles.cardTitle}>{item.nome}</Text><Text style={styles.cardPrice}>Preço: R${item.preco.toFixed(2)}</Text><Text style={styles.cardDescription}>{item.descricao}</Text></>}
       <TouchableOpacity

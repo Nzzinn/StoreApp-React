@@ -1,20 +1,20 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Feather } from '@expo/vector-icons';
-import Home from '../screens/Home';
 import Cart from '../screens/Cart';
 import { useCart } from '../providers/CartContext';
+import Store from '../screens/Store';
 
 const Tab = createBottomTabNavigator();
 
 export default function TabRoutes() {
-  const { cart } = useCart(); 
+  const { cart } : any = useCart(); 
 
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen
-        name="home"
-        component={Home}
+        name="store"
+        component={Store}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Feather name="home" size={size} color={color} />

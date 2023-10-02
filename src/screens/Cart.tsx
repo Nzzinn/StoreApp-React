@@ -4,9 +4,9 @@ import { View } from "react-native";
 import { useCart } from "../providers/CartContext";
 
 export default function Cart() {
-  const { cart, removeItemFromCart } = useCart();
+  const { cart, removeItemFromCart } : any = useCart();
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item } : any) => (
     <View style={styles.card}>
       {<><Image source={{ uri: item.imagem }} style={styles.cardImage} /><Text style={styles.cardTitle}>{item.nome}</Text><Text style={styles.cardPrice}>Preço: R${item.preco.toFixed(2)}</Text><Text style={styles.cardDescription}>{item.descricao}</Text></>}
       <TouchableOpacity
@@ -29,7 +29,7 @@ export default function Cart() {
         />
         <View>
           <Text style={styles.total}>
-            Total: R${cart.reduce((acc, item) => acc + (item.preco * item.quantidade), 0).toFixed(2)}
+            Total: R${cart.reduce((acc : any, item : any) => acc + (item.preco * item.quantidade), 0).toFixed(2)}
           </Text>
         </View>
       </View>
