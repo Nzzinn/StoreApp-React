@@ -176,12 +176,6 @@ export default function Products() {
 }
 
 const styles = StyleSheet.create({
-  title: {
-    color: '#000',
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
   card: {
       marginTop: 10,
       backgroundColor: '#fff',
