@@ -1,5 +1,6 @@
-import { StyleSheet, View, Text, Image, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, Image, FlatList } from 'react-native';
 import { useCart } from '../providers/CartContext';
+import Button from './Button';
 
 export default function Products() {
   const { addItemToCart } : any = useCart();
@@ -158,12 +159,7 @@ export default function Products() {
   const renderItem = ({ item } : any) => (
     <View style={styles.card}>
       {<><Image source={{ uri: item.imagem }} style={styles.cardImage} /><Text style={styles.cardTitle}>{item.nome}</Text><Text style={styles.cardPrice}>Preço: R${item.preco.toFixed(2)}</Text><Text style={styles.cardDescription}>{item.descricao}</Text></>}
-      <TouchableOpacity
-        style={styles.addToCartButton}
-        onPress={() => handleAddToCart(item)}
-      >
-        <Text style={styles.addToCartButtonText}>Adicionar ao Carrinho</Text>
-      </TouchableOpacity>
+      <Button text="Adicionar ao Carrinho" onPress={() => handleAddToCart(item)} styleButton={styles.addToCartButton} styleText={styles.addToCartButtonText} />
     </View>
   );
   
