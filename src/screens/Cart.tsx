@@ -1,20 +1,22 @@
 import BackgroundApp from "../components/BackgroundApp";
-import { StyleSheet, Text, FlatList, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, FlatList, Image } from "react-native";
 import { View } from "react-native";
 import { useCart } from "../providers/CartContext";
+import Button from "../components/Button";
 
 export default function Cart() {
-  const { cart, removeItemFromCart } : any = useCart();
+  const { cart, addItemToCart,removeItemFromCart } : any = useCart();
 
   const renderItem = ({ item } : any) => (
     <View style={styles.card}>
-      {<><Image source={{ uri: item.imagem }} style={styles.cardImage} /><Text style={styles.cardTitle}>{item.nome}</Text><Text style={styles.cardPrice}>Preço: R${item.preco.toFixed(2)}</Text><Text style={styles.cardDescription}>{item.descricao}</Text></>}
-      <TouchableOpacity
-        style={styles.removeFromCartButton}
-        onPress={() => removeItemFromCart(item)}
-      >
-        <Text style={styles.removeFromCartButtonText}>Remover do Carrinho</Text>
-      </TouchableOpacity>
+      {<><Image source={{ uri: item.imagem }} style={styles.cardImage} />
+      <Text style={styles.cardTitle}>{item.nome}</Text>
+      <Text style={styles.cardPrice}>Preço: R${item.preco.toFixed(2)}</Text>
+      <View style={styles.cardButtons}>
+      <Text style={styles.cardDescription}>{item.descricao}</Text>
+      <Button text="-" onPress={() => removeItemFromCart(item)} styleText={styles.removeFromCartButton}/><Text style={styles.itemQuantity}>{item.quantidade}</Text><Button text="+" onPress={() => addItemToCart(item)} styleText={styles.addItemsToCart}/>
+      </View>
+      </>}
     </View>
   );
 
@@ -22,16 +24,16 @@ export default function Cart() {
     <BackgroundApp>
       <View style={styles.container}>
         <Text style={styles.title}>Shopping Cart</Text>
+        <View style={styles.containerTotal}>
+          <Text style={styles.total}>
+            Total: R${cart.reduce((acc : any, item : any) => acc + (item.preco * item.quantidade), 0).toFixed(2)}
+          </Text>
+        </View>
         <FlatList
           data={cart}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
         />
-        <View>
-          <Text style={styles.total}>
-            Total: R${cart.reduce((acc : any, item : any) => acc + (item.preco * item.quantidade), 0).toFixed(2)}
-          </Text>
-        </View>
       </View>
     </BackgroundApp>
   );
@@ -52,10 +54,16 @@ const styles = StyleSheet.create({
         color: '#000',
         fontSize: 24,
         fontWeight: 'bold',
-        marginTop: 13,
         textAlign: 'center',
-        backgroundColor: 'green',
         borderRadius: 10,
+    },
+    containerTotal:{
+      backgroundColor: '#F5FFFA',
+      borderRadius: 5,
+      width: '80%',
+      marginStart: 40,
+      marginTop: 10,
+      marginBottom: 10,
     },
     card: {
         marginTop: 10,
@@ -78,7 +86,7 @@ const styles = StyleSheet.create({
     },
     cardTitle: {
         color: '#000',
-        fontSize: 18,
+        fontSize: 25,
         fontWeight: 'bold',
         marginBottom: 10,
     },
@@ -93,16 +101,30 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginBottom: 10,
     },
+    addItemsToCart: {
+      backgroundColor: '#90EE90',
+      borderRadius: 10,
+      width: 25,
+      height: 20,
+      textAlign: 'center',
+      fontSize: 20,
+      fontWeight: 'bold',
+  },
     removeFromCartButton: {
-        backgroundColor: 'red',
+        backgroundColor: '#FF6347',
         borderRadius: 10,
-        padding: 10,
-        marginTop: 10,
-    },
-    removeFromCartButtonText: {
-        color: '#fff',
-        fontSize: 16,
-        fontWeight: 'bold',
+        width: 25,
+        height: 20,
         textAlign: 'center',
+        fontSize: 20,
+        fontWeight: 'bold',
+    },
+    itemQuantity: {
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
+    cardButtons: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
     },
 });

@@ -64,24 +64,7 @@ export default function Login({ navigation } : any) {
           <Text style={{ color: "red" }}>Todos os campos devem ser preenchidos</Text>
         )}
 
-        <Button
-          text="Entrar"
-          onPress={handleLogin}
-          styleButton={{
-            backgroundColor: "#000",
-            width: "100%",
-            height: 60,
-            alignItems: "center",
-            justifyContent: "center",
-            borderRadius: 10,
-            marginTop: 50,
-          }}
-          styleText={{
-            color: "#d5d5d5",
-            fontSize: 20,
-            fontWeight: "bold",
-          }}
-        />
+        <Button text="Entrar" onPress={handleLogin} styleButton={styles.btn} styleText={styles.textBtn} />
       </View>
     </BackgroundApp>
   );
@@ -107,5 +90,19 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     color: "#000",
+  },
+  btn: {
+    backgroundColor: "#000",
+    width: "100%",
+    height: 60,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 10,
+    marginTop: 50,
+  },
+  textBtn: {
+    color: "#d5d5d5",
+    fontSize: 20,
+    fontWeight: "bold",
   },
 });
