@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import Button from "./Button";
+import BackgroundApp from "./BackgroundApp";
 
 export default function ConfirmLogout({navigation} : any){
     const dontExit = () => {
@@ -11,13 +12,15 @@ export default function ConfirmLogout({navigation} : any){
     }
 
     return(
-        <View style={styles.container}>
-            <Text style={styles.title}>Tem certeza que deseja sair?</Text>
-            <View style={styles.btnContainer}>
-                <Button text="Não" onPress={dontExit} styleButton={styles.btn} styleText={styles.btnText}/>
-                <Button text="Sim" onPress={exit} styleButton={styles.btn} styleText={styles.btnText}/>
+        <BackgroundApp>
+            <View style={styles.container}>
+                <Text style={styles.title}>Tem certeza que deseja sair?</Text>
+                <View style={styles.btnContainer}>
+                    <Button text="Não" onPress={dontExit} styleButton={styles.btn} styleText={styles.btnText}/>
+                    <Button text="Sim" onPress={exit} styleButton={styles.btn} styleText={styles.btnText}/>
+                </View>
             </View>
-        </View>
+        </BackgroundApp>
     )
 }
 
@@ -45,7 +48,8 @@ const styles = StyleSheet.create({
         height: 40,
         width: 50,
         marginTop: 10,
-        marginRight: 10,
+        marginRight: 30,
+        marginLeft: 30,
         borderRadius: 8,
         alignItems: 'center',
         justifyContent: 'center'
